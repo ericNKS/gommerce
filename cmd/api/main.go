@@ -1,8 +1,7 @@
 package main
 
 import (
-	"fmt"
-
+	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
 )
 
@@ -15,5 +14,11 @@ func init() {
 }
 
 func main() {
-	fmt.Println("main")
+	app := fiber.New()
+
+	app.Get("/", func(ctx *fiber.Ctx) error {
+		return ctx.SendString("Hello World")
+	})
+
+	app.Listen(":3000")
 }
