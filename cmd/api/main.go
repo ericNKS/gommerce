@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/ericNKS/gommerce/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
 )
@@ -16,9 +17,7 @@ func init() {
 func main() {
 	app := fiber.New()
 
-	app.Get("/", func(ctx *fiber.Ctx) error {
-		return ctx.SendString("Hello World")
-	})
+	routes.Exec(app)
 
 	app.Listen(":3000")
 }
