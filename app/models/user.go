@@ -3,7 +3,7 @@ package models
 import "github.com/google/uuid"
 
 type User struct {
-	Model
+	model
 	Name     string
 	Email    string `gorm:"index:idx_email,unique"`
 	Password string
