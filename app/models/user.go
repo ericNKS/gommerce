@@ -7,18 +7,18 @@ type User struct {
 	Name     string
 	Email    string `gorm:"index:idx_email,unique"`
 	Password string
-	Rule     int8 `gorm:"default:0"`
+	Rule     []string `gorm:"serializer:json;default:'{\"user\"}'"`
 }
 
 type UserCreate struct {
-	Name     string `json:"name" validate:"required,min=4"`
-	Email    string `json:"email" validate:"required,email"`
-	Password string `json:"password" validate:"required,min=8"`
-	Rule     int8   `json:"rule"`
+	Name     string   `json:"name" validate:"required,min=4"`
+	Email    string   `json:"email" validate:"required,email"`
+	Password string   `json:"password" validate:"required,min=8"`
+	Rule     []string `json:"rule"`
 }
 
 type UserResponse struct {
 	Id   uuid.UUID `json:"id"`
 	Name string    `json:"name"`
-	Rule int8      `json:"rule"`
+	Rule []string  `json:"rule"`
 }

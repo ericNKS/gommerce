@@ -9,6 +9,10 @@ type userRepository struct {
 	db *database.Database
 }
 
+type UserRepositoryInterface interface {
+	Save(user *models.User) error
+}
+
 func UserRepository() (*userRepository, error) {
 	db, err := database.DB()
 	if err != nil {
@@ -20,6 +24,6 @@ func UserRepository() (*userRepository, error) {
 	}, nil
 }
 
-func (ur *userRepository) Save(user *models.User) {
-
+func (ur *userRepository) Save(user *models.User) error {
+	return nil
 }
