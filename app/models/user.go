@@ -1,7 +1,5 @@
 package models
 
-import "github.com/google/uuid"
-
 type User struct {
 	model
 	Name     string
@@ -18,7 +16,26 @@ type UserCreate struct {
 }
 
 type UserResponse struct {
-	Id   uuid.UUID `json:"id"`
-	Name string    `json:"name"`
-	Rule []string  `json:"rule"`
+	model
+	Name  string   `json:"name"`
+	Email string   `json:"email"`
+	Rule  []string `json:"rule"`
+}
+
+func (u *User) Response() *UserResponse {
+	return &UserResponse{
+		model: u.model,
+		Name:  u.Name,
+		Email: u.Email,
+		Rule:  u.Rule,
+	}
+}
+
+func (uc *UserCreate) ConvertToUser() *User {
+	return &User{
+		Name:     uc.Name,
+		Email:    uc.Email,
+		Password: uc.Password,
+		Rule:     uc.Rule,
+	}
 }

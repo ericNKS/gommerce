@@ -7,11 +7,20 @@ import (
 	"github.com/ericNKS/gommerce/app/repository"
 )
 
-type UserCreateService struct {
+type userCreateService struct {
 	repository repository.UserRepositoryInterface
 }
 
-func (ucs *UserCreateService) Execute(user *models.User) error {
+func UserCreateService(
+	repo repository.UserRepositoryInterface,
+) *userCreateService {
+
+	return &userCreateService{
+		repository: repo,
+	}
+}
+
+func (ucs *userCreateService) Execute(user *models.User) error {
 	if err := validate(user); err != nil {
 		return err
 	}
